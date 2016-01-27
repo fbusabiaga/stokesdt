@@ -23,3 +23,5 @@ clean:
 	make -C tests clean
 	make -C tools clean
 	make -C mex clean
+	rm -rf install/
+
