@@ -1,0 +1,27 @@
+export CC="/opt/intel/bin/icc"
+CXX=/opt/intel/bin/icpc
+LD=/opt/intel/bin/xild
+AR=/opt/intel/bin/xiar
+RANLIB=/opt/intel/dump/usr/linux-k1om-4.7/x86_64-k1om-linux/bin/ranlib
+MEX=/opt/matlab/bin/mex
+MEXEXT=mexa64
+
+CXXFLAGS="-O3 -Wall -w2"
+CXXFLAGS+=-openmp
+CXXFLAGS+=-mkl
+CXXFLAGS+=-std=c++11
+CXXFLAGS+="-Wsign-compare -Wunknown-pragmas -Wreturn-type"
+CXXFLAGS+="-Wunused-variable -Wuninitialized"
+CXXFLAGS+="-Wmissing-prototypes -Wmissing-declarations"
+CXXFLAGS+=-offload
+CXXFLAGS+=-DENABLE_PROFILE_
+MKLROOT=/opt/intel/mkl/
+
+MEXFLAGS=CXXFLAGS="-O3 -Wall -fPIC -w2 -openmp -std=c++11 -offload -I${TOPDIR}/install/include" \
+LDFLAGS="-static-intel -mkl -liomp5 -lm"
+
+CP="cp -f"
+RM="rm -f"
+MKDIR="mkdir -p"
+
+

@@ -15,13 +15,12 @@ CXXFLAGS += -std=c++11
 CXXFLAGS += -Wsign-compare -Wunknown-pragmas -Wreturn-type
 CXXFLAGS += -Wunused-variable -Wuninitialized
 CXXFLAGS += -Wmissing-prototypes -Wmissing-declarations
-CXXFLAGS += -qno-offload
+CXXFLAGS += -offload
 CXXFLAGS += -DENABLE_PROFILE_
 MKLROOT = /opt/intel/mkl/
 
-MEXFLAGS = CXXFLAGS="-O3 -Wall -fPIC -w2 -openmp -std=c++11 -qno-offload\
-           -I${TOPDIR}/install/include" \
-	   LDFLAGS="-static-intel -mkl -liomp5 -lm"
+MEXFLAGS = CXXFLAGS="-O3 -Wall -fPIC -w2 -openmp -std=c++11 -offload -I${TOPDIR}/install/include" \
+LDFLAGS="-static-intel -mkl -liomp5 -lm"
 
 CP    = cp -f
 RM    = rm -f
