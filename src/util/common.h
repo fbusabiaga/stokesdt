@@ -5,7 +5,7 @@
 
 #ifndef COMMON_H_
 #define COMMON_H_
-
+#undef __INTEL_OFFLOAD
 
 #include <malloc.h>
 

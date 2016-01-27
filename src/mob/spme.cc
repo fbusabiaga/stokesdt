@@ -861,7 +861,7 @@ bool CreateSpmeEngine(const int npos,
 #ifdef __INTEL_OFFLOAD
     int nbcpu = 1;
     int nbmic = 1;
-    int mic_numdevs = _Offload_number_of_devices();;
+    int mic_numdevs = _Offload_number_of_devices();
     int nbs = nbmic * mic_numdevs + nbcpu;
     p_spme[0]->nbs = nbs;
     p_spme[0]->nbcpu = nbcpu;
