@@ -1,0 +1,22 @@
+# Compiled source #
+###################
+*.o
+*.mod
+*.a
+
+# tmp files #
+############
+*~
+
+# Makefiles #
+#############
+
+
+# Input files #
+###############
+
+
+# Exclude some folders #
+########################
+install/
+
