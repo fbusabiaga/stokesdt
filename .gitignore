@@ -19,4 +19,4 @@
 # Exclude some folders #
 ########################
 install/
-
+doc/
