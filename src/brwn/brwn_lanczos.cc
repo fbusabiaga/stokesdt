@@ -9,6 +9,7 @@
 #include "brwn_lanczos.h"
 #include "log.h"
 #include "profile.h"
+#include <fstream>
 
 
 namespace stokesdt {
@@ -70,6 +71,21 @@ int BrwnLanczos::Lanczos(MobBase *mob,
         if (iter > 0) {
             cblas_daxpy(dim_, -1.0, y, 1, y_old_, 1);
             double normy = cblas_dnrm2(dim_, y_old_, 1);
+	    if(name_file_residual_ != ""){
+	        static bool fileCreated = 0;
+		if(fileCreated==0){
+		    std::ofstream f(name_file_residual_.c_str());
+		    f << 0 << "   "  << 1 << std::endl;
+		    f << iter << "   "  << normy/normz << std::endl;
+		    f.close();
+		    fileCreated = 1;
+		}
+		else{
+		    std::ofstream f(name_file_residual_, std::ofstream::app);
+		    f << iter << "   " << normy/normz << std::endl;
+		    f.close();
+		}
+	    }
             if (normy/normz < tol_) {
                 break;
             }
@@ -208,7 +224,23 @@ BrwnLanczos::BrwnLanczos(const int dim, const int max_iters,
       max_nrhs_(max_nrhs),
       tol_(tol),
       v_(NULL),
-      y_old_(NULL)
+      y_old_(NULL),
+      name_file_residual_("")
+{
+
+}
+
+
+BrwnLanczos::BrwnLanczos(const int dim, const int max_iters,
+                         const int max_nrhs, const double tol,
+			 const std::string name_file_residual)
+    : dim_(dim),
+      max_iters_(max_iters),
+      max_nrhs_(max_nrhs),
+      tol_(tol),
+      v_(NULL),
+      y_old_(NULL),
+      name_file_residual_(name_file_residual)
 {
 
 }

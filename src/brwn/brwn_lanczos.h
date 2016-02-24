@@ -8,6 +8,7 @@
 
 
 #include "brwn_base.h"
+#include <string>
 
 
 namespace stokesdt {
@@ -44,6 +45,15 @@ class BrwnLanczos : public BrwnBase {
      */
     BrwnLanczos(const int dim, const int max_iters,
                 const int max_nrhs, const double tol);
+
+    /*
+     * @brief Class constructor
+     *
+     * It includes a string with the file name to write the residual
+     */
+    BrwnLanczos(const int dim, const int max_iters,
+                const int max_nrhs, const double tol,
+		const std::string name_file_residual);
 
     /// @copydoc BrwnBase::~BrwnBase()
     virtual ~BrwnLanczos();
@@ -104,6 +114,8 @@ class BrwnLanczos : public BrwnBase {
     int ldv_;
     /// the buffer for old y
     double *y_old_;
+    /// name of the file to write the residuals
+    std::string name_file_residual_;
 };
 
 } // namespace stokesdt
