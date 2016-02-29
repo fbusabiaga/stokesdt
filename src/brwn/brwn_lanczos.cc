@@ -69,6 +69,7 @@ int BrwnLanczos::Lanczos(MobBase *mob,
 
         // check convergence
         if (iter > 0) {
+	    double normy_old = cblas_dnrm2(dim_, y_old_, 1);
             cblas_daxpy(dim_, -1.0, y, 1, y_old_, 1);
             double normy = cblas_dnrm2(dim_, y_old_, 1);
 	    if(name_file_residual_ != ""){
@@ -76,17 +77,17 @@ int BrwnLanczos::Lanczos(MobBase *mob,
 		if(fileCreated==0){
 		    std::ofstream f(name_file_residual_.c_str());
 		    f << 0 << "   "  << 1 << std::endl;
-		    f << iter << "   "  << normy/normz << std::endl;
+		    f << iter << "   "  << normy/normy_old << std::endl;
 		    f.close();
 		    fileCreated = 1;
 		}
 		else{
 		    std::ofstream f(name_file_residual_, std::ofstream::app);
-		    f << iter << "   " << normy/normz << std::endl;
+		    f << iter << "   " << normy/normy_old << std::endl;
 		    f.close();
 		}
 	    }
-            if (normy/normz < tol_) {
+            if (normy/normy_old < tol_) {
                 break;
             }
         }
