@@ -19,10 +19,11 @@ int BrwnLanczos::Lanczos(MobBase *mob,
                          double *y)
 {
     int ldh = detail::PadLen(max_iters_ + 1, sizeof(double));
+    int ldh_large = detail::PadLen(2*max_iters_ + 1, sizeof(double));
     __declspec(align(detail::kAlignLen)) double d0[ldh];
     __declspec(align(detail::kAlignLen)) double e0[ldh];
     __declspec(align(detail::kAlignLen)) double d1[ldh];
-    __declspec(align(detail::kAlignLen)) double e1[ldh];
+    __declspec(align(detail::kAlignLen)) double e1[ldh_large]; 
     __declspec(align(detail::kAlignLen)) double h2[(max_iters_ + 1) * ldh];
 
     // v(:,1) = z/norm(z)
