@@ -50,7 +50,12 @@ int BrwnLanczos::Lanczos(MobBase *mob,
         e0[iter] = normw;
 
         // v(i + 1) = w = w/normw;
-        cblas_dscal(dim_, 1.0/normw, w, 1);
+	if(normw > 0){
+	  cblas_dscal(dim_, 1.0/normw, w, 1);
+	}
+	else{
+	  w[0] = 1;
+	}
 
         // h2 = sqrtm(h)      
         cblas_dcopy(iter + 1, d0, 1, d1, 1);
